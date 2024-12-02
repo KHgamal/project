@@ -34,7 +34,7 @@ class NotificationsProvider extends ChangeNotifier {
     final body = bodyController.text.trim();
 
     final notification = NotificationEntity(
-      id: 0,
+      id: DateTime.now().second,
       title: title,
       body: body,
       scheduledDate: selectedDate,

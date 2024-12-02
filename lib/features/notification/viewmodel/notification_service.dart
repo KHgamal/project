@@ -26,7 +26,6 @@ class NotificationService {
         channelDescription: 'channel description',
       ),
     );
-    print("Showing notification...");
     await localNotificationsPlugin.show(
       notification.id,
       notification.title,
@@ -56,8 +55,10 @@ class NotificationService {
   }
 
   static Future<List<PendingNotificationRequest>> getPendingNotifications() async {
-    return await localNotificationsPlugin.pendingNotificationRequests();
-  }
+  final pendingNotifications = await localNotificationsPlugin.pendingNotificationRequests();
+  return pendingNotifications;
+}
+
 
  static Future<void> clearNotification(int id) async {
     await localNotificationsPlugin.cancel(id);

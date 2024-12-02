@@ -9,7 +9,7 @@ class ShowNotificationScreen extends StatelessWidget {
 
    @override
   Widget build(BuildContext context) {
-    final notificationProvider = Provider.of<NotificationsProvider>(context);
+    final notificationProvider = Provider.of<NotificationsProvider>(context , listen: false);
 
     return Scaffold(
       appBar: AppBar(title: const Text('Notifications')),
