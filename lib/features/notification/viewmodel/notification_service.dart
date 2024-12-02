@@ -1,11 +1,9 @@
-import 'package:injectable/injectable.dart';
-
-import '../../domain/entities/notification_entity.dart';
+import '../models/notification_entity.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:timezone/timezone.dart' as tz;
 
 //@Injectable(as: NotificationRepository)
-class NotificationRepositoryImpl {
+class NotificationService {
    static final FlutterLocalNotificationsPlugin localNotificationsPlugin =
       FlutterLocalNotificationsPlugin();
 
