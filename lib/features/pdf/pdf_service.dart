@@ -4,10 +4,7 @@ import 'package:pdf/widgets.dart' as pw;
 import 'package:path_provider/path_provider.dart';
 import 'package:printing/printing.dart';
 import 'package:pdf/pdf.dart';
-/*
-          // Arabic Section
-         
-*/ 
+
 class PdfService {
   static final pdf = pw.Document();
   

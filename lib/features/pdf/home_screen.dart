@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:lottie/lottie.dart';
 import 'package:rasid_task/features/pdf/pdf_service.dart';
 
 
@@ -12,24 +13,35 @@ const  HomeScreen({super.key});
       future: PdfService.generatePortfolioPDF(),
       builder: (context , sna) {
         return Scaffold(
-          appBar: AppBar(title: const Text('Portfolio PDF Generator')),
-          body: Center(
+          backgroundColor: Colors.white,
+          body: SafeArea(
             child: Column(
-              mainAxisSize: MainAxisSize.min,
+             // mainAxisSize: MainAxisSize.min,
               children: [
-                ElevatedButton(
-                  onPressed: ()  {
-                    PdfService.printPDF();
-                  },
-                  child: const Text('Open PDF' ,),
+                const SizedBox(height: 30,),
+               const  Text('Portfolio PDF Generator' , style: TextStyle(fontSize: 20 , fontWeight: FontWeight.bold),),
+               // const Spacer(),
+                Lottie.asset("assets/pdf.json"),
+                const Spacer(),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    ElevatedButton(
+                      onPressed: ()  {
+                        PdfService.printPDF();
+                      },
+                      child: const Text('Open PDF' ,),
+                    ),
+                    
+                    ElevatedButton(
+                      onPressed: ()   {
+                        PdfService.sharePDF();
+                      },
+                      child: const Text('Share PDF'),
+                    ),
+                  ],
                 ),
-                const SizedBox(height: 10),
-                ElevatedButton(
-                  onPressed: ()   {
-                    PdfService.sharePDF();
-                  },
-                  child: const Text('Share PDF'),
-                ),
+                const Spacer(flex: 2,),
               ],
             ),
           ),
