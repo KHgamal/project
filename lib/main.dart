@@ -27,7 +27,7 @@ class MyApp extends StatelessWidget {
       child: const MaterialApp(
         debugShowCheckedModeBanner: false,
         title: 'Notification Demo',
-        home: HomeScreen(),
+        home: NotificationScreen(),
       ),
     );
   }

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:lottie/lottie.dart';
 import 'package:provider/provider.dart';
 import 'package:rasid_task/features/notification/viewmodel/controller/notification_provider.dart';
 import 'package:rasid_task/features/notification/viewmodel/notification_service.dart';
@@ -19,7 +20,18 @@ class ShowNotificationScreen extends StatelessWidget {
           final notifications = notificationProvider.notifications;
 
           if (notifications.isEmpty) {
-            return const Center(child: Text('No Notifications'));
+            return  SizedBox(
+              width: double.infinity,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                //crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                Lottie.asset("assets/no.json"),
+                const SizedBox( height: 30,),
+                const Text("No pending Notification" , style: TextStyle(fontWeight: FontWeight.bold ,
+                fontSize: 20),),
+              ],),
+            );
           }
 
           return Column(
