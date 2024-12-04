@@ -13,7 +13,8 @@ class ShowNotificationScreen extends StatelessWidget {
     final notificationProvider = Provider.of<NotificationsProvider>(context , listen: false);
 
     return Scaffold(
-      appBar: AppBar(title: const Text('Notifications')),
+      appBar: AppBar(title: const Text('Notifications'),backgroundColor: const Color.fromARGB(255, 50, 187, 162),
+      foregroundColor: Colors.white,),
       body: FutureBuilder(
         future: notificationProvider.fetchNotifications(),
         builder: (context, snapshot) {
@@ -28,7 +29,7 @@ class ShowNotificationScreen extends StatelessWidget {
                 children: [
                 Lottie.asset("assets/no.json"),
                 const SizedBox( height: 30,),
-                const Text("No pending Notification" , style: TextStyle(fontWeight: FontWeight.bold ,
+                const Text("No pending Notification" , style: TextStyle(fontWeight: FontWeight.bold , color: Color.fromARGB(255, 19, 35, 128),
                 fontSize: 20),),
               ],),
             );

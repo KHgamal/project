@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:rasid_task/features/location/location_provider.dart';
+import 'package:rasid_task/features/location/location_view.dart';
 import 'package:rasid_task/features/notification/viewmodel/controller/notification_provider.dart';
 //import 'package:rasid_task/core/di/injection.dart';
 //import 'package:rasid_task/features/notification/data/data_sources/local_data_source/notification_service.dart';
@@ -22,12 +24,16 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return  ChangeNotifierProvider(
-        create: (context) => NotificationsProvider(),
-      child: const MaterialApp(
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (_) => LocationProvider()),
+        ChangeNotifierProvider(create: (context) => NotificationsProvider(),),
+      ],
+      child:  MaterialApp(
         debugShowCheckedModeBanner: false,
         title: 'Notification Demo',
-        home: NotificationScreen(),
+        theme: ThemeData(useMaterial3: true ,scaffoldBackgroundColor: Colors.white),
+        home: const HomeScreen (),
       ),
     );
   }
@@ -45,3 +51,13 @@ class MyApp extends StatelessWidget {
 
 // Use the printing package for full flutter print and share operation.
 // printing package's PdfGoogleFonts
+
+// Update the AndroidManifest.xml file:
+/* <manifest>
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
+    <uses-permission android:name="android.permission.QUERY_ALL_PACKAGES" />
+    <application>
+        <!-- Add these lines to request location services -->
+    </application>
+</manifest>*/

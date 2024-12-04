@@ -12,7 +12,8 @@ class NotificationScreen extends StatelessWidget {
     final notificationProvider = Provider.of<NotificationsProvider>(context);
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Local Notifications"),
+        title: const Text("Local Notifications"),backgroundColor: Color.fromARGB(255, 50, 187, 162),
+        foregroundColor: Colors.white,
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -66,13 +67,17 @@ class NotificationScreen extends StatelessWidget {
                 children: [
                   Expanded(
                     child: ElevatedButton(
+                      style:  ElevatedButton.styleFrom(backgroundColor: Color.fromARGB(255, 50, 187, 162) ,
+              foregroundColor: Colors.white),
                       onPressed: notificationProvider.addNotification,
                       child: const Text("Trigger Notification"),
                     ),
                   ),
                   const SizedBox(width: 8),
                    Expanded(
-                     child: ElevatedButton( onPressed: ()=> Navigator.push(
+                     child: ElevatedButton(
+                      style:  ElevatedButton.styleFrom(backgroundColor: Color.fromARGB(255, 50, 187, 162) ,
+              foregroundColor: Colors.white), onPressed: ()=> Navigator.push(
                          context,
                          MaterialPageRoute(builder: (context) => const ShowNotificationScreen()),
                        ),

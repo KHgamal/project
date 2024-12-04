@@ -13,7 +13,6 @@ const  HomeScreen({super.key});
       future: PdfService.generatePortfolioPDF(),
       builder: (context , sna) {
         return Scaffold(
-          backgroundColor: Colors.white,
           body: SafeArea(
             child: Column(
              // mainAxisSize: MainAxisSize.min,
@@ -27,6 +26,8 @@ const  HomeScreen({super.key});
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
                     ElevatedButton(
+                      style:  ElevatedButton.styleFrom(backgroundColor: Color(0xff149a61) ,
+              foregroundColor: Colors.white),
                       onPressed: ()  {
                         PdfService.printPDF();
                       },
@@ -34,6 +35,8 @@ const  HomeScreen({super.key});
                     ),
                     
                     ElevatedButton(
+                      style:  ElevatedButton.styleFrom(backgroundColor: const Color(0xff149a61) ,
+              foregroundColor: Colors.white),
                       onPressed: ()   {
                         PdfService.sharePDF();
                       },
