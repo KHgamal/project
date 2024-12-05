@@ -8,7 +8,7 @@ class NotificationsProvider extends ChangeNotifier {
   final TextEditingController bodyController = TextEditingController();
   DateTime? selectedDate;
   int? countdownSeconds;
-
+  final notifyFormKey = GlobalKey<FormState>();
   List<NotificationEntity> notifications = [];
 
   Future<void> fetchNotifications() async {
@@ -71,7 +71,7 @@ class NotificationsProvider extends ChangeNotifier {
   notifyListeners();
 }
 
-    void pickDate(context) async {
+   void pickDate(context) async {
     final DateTime? pickedDate = await showDatePicker(
       context: context,
       initialDate: DateTime.now(),

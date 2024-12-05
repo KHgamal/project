@@ -1,18 +1,10 @@
 import 'package:geolocator/geolocator.dart';
 import 'package:flutter/material.dart';
-import 'package:http/http.dart' as http;
 import 'package:geocoding/geocoding.dart';
 
 class LocationService {
   static Future<bool> handleLocationPermission(context) async {
     LocationPermission permission;
-    bool serviceEnabled = await Geolocator.isLocationServiceEnabled();
- /*   if (!serviceEnabled) {
-      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-          content: Text(
-              'Location services are disabled. Please enable the services')));
-      return false;
-    }*/
     permission = await Geolocator.checkPermission();
     if (permission == LocationPermission.denied) {
       permission = await Geolocator.requestPermission();

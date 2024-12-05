@@ -7,6 +7,8 @@ class LocationProvider extends ChangeNotifier {
       final latController = TextEditingController();
     final lngController = TextEditingController();
     final linkController = TextEditingController();
+    final latLngFormKey = GlobalKey<FormState>();
+    final urlFormKey = GlobalKey<FormState>();
   String address = "";
 
   Future<void> fetchCurrentLocation( context) async {
@@ -33,7 +35,7 @@ class LocationProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  Future<void> fetchAddressFromGoogleMapsLink(BuildContext context, String link) async {
+  Future<void> fetchAddressFromGoogleMapsLink( context, String link) async {
     try {
       final position = await LocationService.getLocationFromGoogleMapsLink(context, link);
       if (position == null) {
