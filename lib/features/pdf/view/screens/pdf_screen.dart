@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
-import 'package:provider/provider.dart';
 import 'package:rasid_task/core/colors.dart';
 import 'package:rasid_task/features/pdf/pdf_service.dart';
 
@@ -13,9 +12,14 @@ class PDFScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
-        child: Consumer<PdfService>(
-          builder: (context, pd ,_) {
-            return Column(
+        child:FutureBuilder<void>(
+      future: PdfService.generatePortfolioPDF(),
+      builder: (context, snapshot) {
+        if (snapshot.connectionState == ConnectionState.waiting) {
+          return const Center(child: CircularProgressIndicator());
+        }
+           else{
+             return Column(
               children: [
                 const SizedBox(
                   height: 30,
@@ -26,7 +30,7 @@ class PDFScreen extends StatelessWidget {
                   style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                 ),
                 const Spacer(),
-                Lottie.asset("assets/pdf.json"),
+                Lottie.asset("assets/images/pdf.json"),
                 const Spacer(),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -34,12 +38,12 @@ class PDFScreen extends StatelessWidget {
                     CustomButton(
                       color: AllColors.green,
                       text: "Open PDF",
-                      onPressed: () => pd.printPDF(),
+                      onPressed: () => PdfService.printPDF(),
                     ),
                     CustomButton(
                       color: AllColors.green,
                       text: 'Share PDF',
-                      onPressed: () => pd.sharePDF(),
+                      onPressed: () => PdfService.sharePDF(),
                     ),
                   ],
                 ),
@@ -48,7 +52,8 @@ class PDFScreen extends StatelessWidget {
                 ),
               ],
             );
-          },
+           }
+          }
         ),
       ),
     );

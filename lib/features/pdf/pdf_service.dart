@@ -1,5 +1,6 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:open_filex/open_filex.dart';
 import 'package:pdf/widgets.dart' as pw;
 import 'package:path_provider/path_provider.dart';
@@ -9,17 +10,19 @@ import 'package:rasid_task/features/pdf/view/widgets/ar.dart';
 import 'package:rasid_task/features/pdf/view/widgets/en.dart';
 import 'package:rasid_task/features/pdf/view/widgets/header.dart';
 
-class PdfService with ChangeNotifier {
-  final pdf = pw.Document();
- late File file;
+class PdfService  {
+ static final pdf = pw.Document();
+ static late File file;
 
-  Future<void> generatePortfolioPDF() async {
+ static Future<void> generatePortfolioPDF() async {
     try {
       // Define fonts
-      final englishFont = await PdfGoogleFonts.openSansRegular();
-      final arabicFont = await PdfGoogleFonts.amiriRegular();
-      final emoji = await PdfGoogleFonts.notoColorEmoji();
-      final fallbackFont = await PdfGoogleFonts.notoNaskhArabicRegular();
+      final arabicFont =  pw.Font.ttf(
+        await rootBundle.load('assets/fonts/Amiri-Regular.ttf'),
+      );
+      final emoji = pw.Font.ttf(
+        await rootBundle.load('assets/fonts/NotoEmoji-Regular.ttf'),
+      );
 
       // Add content
       pdf.addPage(
@@ -35,9 +38,9 @@ class PdfService with ChangeNotifier {
           ),
           build: (context) => [
             // English Section
-            englishSection(emoji, englishFont),
+            englishSection(emoji, arabicFont),
             pw.NewPage(),
-            arabicSection(emoji, fallbackFont),
+            arabicSection(emoji, arabicFont),
           ],
         ),
       );
@@ -46,18 +49,16 @@ class PdfService with ChangeNotifier {
       final output = await getTemporaryDirectory();
       file = File("${output.path}/portfolio.pdf");
       await file.writeAsBytes(await pdf.save());
-
-      notifyListeners(); // Notify listeners about changes
     } catch (e) {
       debugPrint('Error generating PDF: $e');
     }
   }
 
-  Future<void> printPDF() async {
+ static Future<void> printPDF() async {
       await OpenFilex.open(file.path);
   }
 
-  Future<void> sharePDF() async {
+static  Future<void> sharePDF() async {
 
       await Printing.sharePdf(
         bytes: file.readAsBytesSync(),

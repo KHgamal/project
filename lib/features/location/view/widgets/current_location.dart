@@ -14,7 +14,7 @@ class CurrentLocation extends StatelessWidget {
     final provider = context.watch<LocationProvider>();
     return Column(
       children: [
-        Lottie.asset('assets/map.json', height: 150),
+        Lottie.asset('assets/images/map.json', height: 150),
         const SizedBox(
           height: 18,
         ),

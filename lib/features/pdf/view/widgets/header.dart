@@ -10,7 +10,7 @@ pw.Widget buildHeader(pw.Font emoji ) {
      pw.Center(child:  pw.Text("🗺  Cairo , Egypt     📱  +20 1119115416     ✉  khadigagamal782@gmail.com",
         textAlign: pw.TextAlign.center , style: pw.TextStyle(
             fontFallback: [emoji],
-          )),)
+          )),),
     ],
   );
 }

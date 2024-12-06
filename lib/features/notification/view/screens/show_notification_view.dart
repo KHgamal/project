@@ -31,7 +31,7 @@ class ShowNotificationScreen extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.center,
                     //crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
-                      Lottie.asset("assets/no.json"),
+                      Lottie.asset("assets/images/no.json"),
                       const SizedBox(
                         height: 30,
                       ),
@@ -47,39 +47,46 @@ class ShowNotificationScreen extends StatelessWidget {
                 );
               }
 
-              return Column(
+              return ListView(
                 children: [
                   ListView.builder(
+                    physics: NeverScrollableScrollPhysics(),
                     padding: const EdgeInsets.all(16),
                     shrinkWrap: true,
                     itemCount: notifications.length,
                     itemBuilder: (context, index) {
                       final notification = notifications[index];
-                      return ListTile(
-                        shape: RoundedRectangleBorder(
-                          side: const BorderSide(color: Colors.black, width: 1),
-                          borderRadius: BorderRadius.circular(5),
-                        ),
-                        title: Text(notification.title),
-                        subtitle: Text(notification.body),
-                        trailing: IconButton(
-                          icon: const Icon(
-                            Icons.delete,
-                            color: Colors.red,
+                      return Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: ListTile(
+                          shape: RoundedRectangleBorder(
+                            side: const BorderSide(color: Colors.black, width: 1),
+                            borderRadius: BorderRadius.circular(5),
                           ),
-                          onPressed: () async {
-                            await notificationProvider
-                                .clearNotification(notification.id);
-                          },
+                          title: Text(notification.title),
+                          subtitle: Text(notification.body),
+                          trailing: IconButton(
+                            icon: const Icon(
+                              Icons.delete,
+                              color: Colors.red,
+                            ),
+                            onPressed: () async {
+                              await notificationProvider
+                                  .clearNotification(notification.id);
+                            },
+                          ),
                         ),
                       );
                     },
                   ),
-                  ElevatedButton(
-                    onPressed: () async {
-                      await NotificationService.clearAllNotifications();
-                    },
-                    child: const Text("Clear All"),
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: ElevatedButton(
+                      onPressed: () async {
+                        await NotificationService.clearAllNotifications(context);
+                      },
+                      child: const Text("Clear All"),
+                    ),
                   )
                 ],
               );

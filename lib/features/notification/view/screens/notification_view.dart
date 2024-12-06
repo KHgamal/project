@@ -5,7 +5,7 @@ import 'package:rasid_task/core/common/widgets/custom_button.dart';
 import 'package:rasid_task/core/common/widgets/text_field.dart';
 import 'package:rasid_task/features/notification/viewmodel/controller/notification_provider.dart';
 import 'package:rasid_task/features/notification/view/screens/show_notification_view.dart';
-import 'package:rasid_task/features/pdf/view/screens/home_screen.dart';
+import 'package:rasid_task/features/pdf/view/screens/pdf_screen.dart';
 
 class NotificationScreen extends StatelessWidget {
   const NotificationScreen({super.key});
@@ -101,11 +101,11 @@ class NotificationScreen extends StatelessWidget {
                         ),
                       ],
                     ),
-                    const SizedBox(height: 30),
                     if (notificationProvider.countdownSeconds != null)
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
+                          const SizedBox(height: 20),
                           const Text(
                             "Countdown to Scheduled Notification:",
                             style: TextStyle(fontWeight: FontWeight.bold),
@@ -118,6 +118,7 @@ class NotificationScreen extends StatelessWidget {
                           ),
                         ],
                       ),
+                      const SizedBox(height: 20),
                     Center(
                       child: CustomButton(
                         color: AllColors.teal,

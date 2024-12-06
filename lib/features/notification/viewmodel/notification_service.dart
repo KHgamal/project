@@ -1,3 +1,6 @@
+import 'package:provider/provider.dart';
+import 'package:rasid_task/features/notification/viewmodel/controller/notification_provider.dart';
+
 import '../models/notification_entity.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:timezone/timezone.dart' as tz;
@@ -46,7 +49,7 @@ class NotificationService {
     await localNotificationsPlugin.zonedSchedule(
       notification.id,
       notification.title,
-      notification.body,
+      notification.body,     
       tz.TZDateTime.from(notification.scheduledDate!, tz.local),
       details,
       uiLocalNotificationDateInterpretation:
@@ -64,7 +67,8 @@ class NotificationService {
     await localNotificationsPlugin.cancel(id);
   }
 
- static Future<void> clearAllNotifications() async {
+ static Future<void> clearAllNotifications(context) async {
     await localNotificationsPlugin.cancelAll();
+        Provider.of<NotificationsProvider>(context , listen: false). countdownSeconds=null;
   }
 }

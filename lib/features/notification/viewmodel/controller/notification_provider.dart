@@ -20,11 +20,13 @@ class NotificationsProvider extends ChangeNotifier {
               body: pn.body!,
             ))
         .toList();
+        
     notifyListeners();
   }
 
   Future<void> clearNotification(int id) async {
     await NotificationService.clearNotification(id);
+    if(id == notifications[notifications.length-1].id) countdownSeconds=null;
     await fetchNotifications(); 
     notifyListeners();
   }
@@ -45,7 +47,9 @@ class NotificationsProvider extends ChangeNotifier {
     } else {
       // Scheduled Notification
       await NotificationService.scheduleNotification(notification);
+      startCountdown();
     }
+    
     await fetchNotifications();
     resetFields();
     notifyListeners();
@@ -91,7 +95,7 @@ class NotificationsProvider extends ChangeNotifier {
             pickedTime.hour,
             pickedTime.minute,
           );
-          startCountdown();
+
       }
     }
     notifyListeners();

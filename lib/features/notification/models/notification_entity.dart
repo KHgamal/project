@@ -1,4 +1,6 @@
-class NotificationEntity {
+import 'package:equatable/equatable.dart';
+
+class NotificationEntity extends Equatable {
   final int id;
   final String title;
   final String body;
@@ -10,4 +12,7 @@ class NotificationEntity {
     required this.body,
     this.scheduledDate,
   });
+  
+  @override
+  List<Object?> get props => [id , title , body , scheduledDate];
 }
